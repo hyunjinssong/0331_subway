@@ -30,8 +30,21 @@ view: bm_card_subway_ver2 {
     sql: ${TABLE}.passenger_cnt ;;
   }
 
+  measure: in {
+    type: sum
+    label: "총승차인원수"
+    sql: ${TABLE}.passenger_cnt ;;
+  }
+
   dimension: getoff_passenger_cnt {
     type: number
+    sql: ${TABLE}.getoff_passenger_cnt ;;
+  }
+
+
+  measure: out {
+    type: sum
+    label: "총하차인원수"
     sql: ${TABLE}.getoff_passenger_cnt ;;
   }
 
@@ -40,11 +53,29 @@ view: bm_card_subway_ver2 {
     sql: ${TABLE}.foot_traffic_cnt ;;
   }
 
+  measure: yudong {
+    type: sum
+    label: "유동인원수"
+    sql: ${TABLE}.foot_traffic_cnt ;;
+  }
+
   dimension: clean_transported_cnt {
     type: number
     sql: ${TABLE}.clean_transported_cnt ;;
   }
 
+  measure: sunsusong {
+    type: sum
+    label: "순수송인원수"
+    sql: ${TABLE}.clean_transported_cnt ;;
+  }
+
+  measure: sunsusong_rate {
+    label: "수송분담율"
+    type: number
+    sql: ${clean_transported_cnt} / ${line_sunsusong.bm_card_subway_ver2_sunsusong} ;;
+    value_format: "0%"
+  }
   set: detail {
     fields: [
       dt,

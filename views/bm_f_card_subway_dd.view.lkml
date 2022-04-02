@@ -27,6 +27,18 @@ view: bm_f_card_subway_dd {
     sql: ${TABLE}.foot_traffic_cnt ;;
   }
 
+  measure: youdong {
+    type: average
+    label: "유동인원수"
+    sql: ${TABLE}.foot_traffic_cnt ;;
+  }
+
+  measure: youdong2 {
+    type: sum
+    label: "더한거"
+    sql: ${TABLE}.foot_traffic_cnt ;;
+  }
+
   dimension: getoff_passenger_cnt {
     type: number
     sql: ${TABLE}.getoff_passenger_cnt ;;
@@ -36,6 +48,7 @@ view: bm_f_card_subway_dd {
     type: number
     sql: ${TABLE}.passenger_cnt ;;
   }
+
 
   dimension: station_nm {
     type: string

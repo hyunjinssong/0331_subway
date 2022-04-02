@@ -2,8 +2,9 @@ view: bm_f_passenger_subway_dd {
   sql_table_name: `project_a_team.bm_f_passenger_subway_dd`
     ;;
 
-  dimension: clean_transported_cnt {
-    type: number
+  measure: clean_transported_cnt {
+    type: sum
+    label: "순수송인원수"
     sql: ${TABLE}.clean_transported_cnt ;;
   }
 
@@ -22,18 +23,34 @@ view: bm_f_passenger_subway_dd {
     sql: ${TABLE}.dt ;;
   }
 
-  dimension: foot_traffic_cnt {
-    type: number
+  measure: foot_traffic_cnt {
+    type: sum
+    label: "유동인원수"
     sql: ${TABLE}.foot_traffic_cnt ;;
   }
 
-  dimension: getoff_passenger_cnt {
+  dimension: lastyear {
+    type: date
+    label: "전기"
+    sql: Datesub(${dt_date}, interval 1 month) ;;
+  }
+
+
+  dimension: youdong {
     type: number
+    label: "유동인원수"
+    sql: ${TABLE}.foot_traffic_cnt ;;
+  }
+
+  measure: getoff_passenger_cnt {
+    type: sum
+    label: "총하차인원수"
     sql: ${TABLE}.getoff_passenger_cnt ;;
   }
 
-  dimension: passenger_cnt {
-    type: number
+  measure: passenger_cnt {
+    type: sum
+    label: "총승차인원수"
     sql: ${TABLE}.passenger_cnt ;;
   }
 

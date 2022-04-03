@@ -32,13 +32,11 @@ explore: bm_d_time_range_cd {}
 explore: jan_feb {}
 
 explore: bm_card_subway_ver2 {
-  from:  bm_f_card_subway_dd
-  label: "card_subway_sunsusong"
-  join:  line_sunsusong{
+  join: line_sunsusong{
     type: left_outer
     relationship: many_to_one
     sql_on: ${bm_card_subway_ver2.subway_line_nm} = ${line_sunsusong.bm_card_subway_ver2_subway_line_nm}
-    AND ${bm_card_subway_ver2.dt_date} = ${line_sunsusong.bm_card_subway_ver2_dt};;
+    AND ${bm_card_subway_ver2.dt} = ${line_sunsusong.bm_card_subway_ver2_dt};;
   }
 }
 

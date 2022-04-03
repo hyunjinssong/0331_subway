@@ -34,6 +34,7 @@ GROUP BY
 
   dimension: bm_card_subway_ver2_sunsusong {
     type: number
+    label: "호선별 순수송인원수"
     sql: ${TABLE}.bm_card_subway_ver2_sunsusong ;;
   }
 

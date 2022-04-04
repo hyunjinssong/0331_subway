@@ -5,7 +5,9 @@ view: january {
 
       SELECT
       (bm_d_holiday_dt.dt ) AS bm_d_holiday_dt_dt_date,
-      COALESCE(SUM(bm_f_passenger_subway_dd.foot_traffic_cnt ), 0) AS bm_f_passenger_subway_dd_foot_traffic_cnt
+      COALESCE(SUM(bm_f_passenger_subway_dd.foot_traffic_cnt ), 0) AS foot_traffic
+
+
       FROM `project_a_team.bm_f_passenger_subway_dd`
       AS bm_f_passenger_subway_dd
       LEFT JOIN `project_a_team.bm_d_holiday_dt`
@@ -15,7 +17,7 @@ view: january {
       1
       ORDER BY
       1
-      LIMIT 5000
+
       ;;
   }
 
@@ -32,8 +34,23 @@ view: january {
 
   dimension: bm_f_passenger_subway_dd_foot_traffic_cnt {
     type: number
-    sql: ${TABLE}.bm_f_passenger_subway_dd_foot_traffic_cnt ;;
+    sql: ${TABLE}.foot_traffic ;;
   }
+
+  # dimension: bm_f_passenger_subway_dd_passenger_cnt {
+  #   type: number
+  #   sql: ${TABLE}.bm_f_passenger_subway_dd_passenger_cnt ;;
+  # }
+
+  # dimension: bm_f_passenger_subway_dd_getoff_passenger_cnt {
+  #   type: number
+  #   sql: ${TABLE}.bm_f_passenger_subway_dd_getoff_passenger_cnt ;;
+  # }
+
+  # dimension: bm_f_passenger_subway_dd_clean_transported_cnt {
+  #   type: number
+  #   sql: ${TABLE}.bm_f_passenger_subway_clean_transported_cnt ;;
+  # }
 
   set: detail {
     fields: [bm_d_holiday_dt_dt_date, bm_f_passenger_subway_dd_foot_traffic_cnt]

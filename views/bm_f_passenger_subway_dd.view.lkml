@@ -29,11 +29,27 @@ view: bm_f_passenger_subway_dd {
     sql: ${TABLE}.foot_traffic_cnt ;;
   }
 
-  dimension: lastyear {
+
+  parameter: p_date_from {
+    view_label: "Date_Parameter"
     type: date
-    label: "전기"
-    sql: Datesub(${dt_date}, interval 1 month) ;;
   }
+
+  parameter: p_date_to {
+    view_label: "Date_Parameter"
+    type: date
+  }
+
+  dimension: period {
+    type: string
+    sql: case when ${dt_date} >= date({% parameter p_date_from%})
+                  and ${dt_date} <= date({% parameter p_date_to%}) then "당기"
+              when ${dt_date} >= date_dub({% parameter p_date_from%}}, interval 1 month)
+                  and ${dt_date} <= date_sub(date({% parameter p_date_to%}), interval 1 month) then "전기"
+        end ;;
+  }
+
+
 
 
   dimension: youdong {

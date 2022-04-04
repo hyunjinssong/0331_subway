@@ -18,9 +18,18 @@ explore: bm_f_card_subway_dd {
     relationship: many_to_one
 
 }
-}
-explore: january {}
+  join: line_sunsusong{
+    type: left_outer
+    relationship: many_to_one
+    sql_on: ${bm_f_card_subway_dd.subway_line_nm} = ${line_sunsusong.bm_card_subway_ver2_subway_line_nm}
+    AND ${bm_f_card_subway_dd.dt_date} = ${line_sunsusong.bm_card_subway_ver2_dt};;
 
+  }
+}
+
+
+explore: january {}
+explore: period {}
 explore: bm_d_transfer_station {}
 
 explore: bm_d_passenger_type_cd {}
@@ -39,7 +48,15 @@ explore: bm_card_subway_ver2 {
     AND ${bm_card_subway_ver2.dt} = ${line_sunsusong.bm_card_subway_ver2_dt};;
   }
 }
+explore: thisyear {
+  join: jan_sub {
+    type: left_outer
+    sql_on: ${jan_sub.bm_f_passenger_subway_dd_dt_date} + interval 1 month = ${thisyear.bm_f_passenger_subway_dd_dt_date}
+          AND ${jan_sub.bm_f_passenger_subway_dd_passenger_type_cd} = ${thisyear.bm_f_passenger_subway_dd_passenger_type_cd}
+            ;;
+    relationship: many_to_many}
 
+}
 explore: bm_f_passenger_subway_dd {
 
   join: bm_d_time_range_cd {
@@ -75,5 +92,14 @@ explore: bm_f_passenger_subway_dd {
     relationship: one_to_one
 
   }
+
+  join: jan_passengertype {
+    type: left_outer
+    sql_on: ${jan_passengertype.bm_f_passenger_subway_dd_dt_date} + interval 1 month = ${bm_f_passenger_subway_dd.dt_date}
+    ;;
+    relationship: one_to_one
+
+  }
+
 
 }

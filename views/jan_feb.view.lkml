@@ -15,7 +15,7 @@ view: jan_feb {
       1
       ORDER BY
       1
-      LIMIT 5000
+
       )
       SELECT
       (january.bm_d_holiday_dt_dt_date ) AS january_bm_d_holiday_dt_dt_date,
@@ -31,7 +31,7 @@ view: jan_feb {
       3
       ORDER BY
       1 DESC
-      LIMIT 500
+
       ;;
   }
 
@@ -40,7 +40,7 @@ view: jan_feb {
     drill_fields: [detail*]
   }
 
-  dimension: change_7_day_rolling_average {
+  dimension: minus {
     type: number
     value_format_name: percent_2
     sql: (bm_f_passenger_subway_dd_foot_traffic_cnt *1.0/ january_bm_f_passenger_subway_dd_foot_traffic_cnt) -1 ;;

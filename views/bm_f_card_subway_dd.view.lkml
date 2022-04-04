@@ -7,6 +7,12 @@ view: bm_f_card_subway_dd {
     sql: ${TABLE}.clean_transported_cnt ;;
   }
 
+  measure: sunsusong_transported_cnt {
+    type: sum
+    label: "순수송인원수"
+    sql: ${TABLE}.clean_transported_cnt ;;
+  }
+
   dimension_group: dt {
     type: time
     timeframes: [
@@ -29,18 +35,23 @@ view: bm_f_card_subway_dd {
 
   measure: youdong {
     type: average
-    label: "유동인원수"
+    label: "평균 유동인원수"
     sql: ${TABLE}.foot_traffic_cnt ;;
   }
 
   measure: youdong2 {
     type: sum
-    label: "더한거"
+    label: "유동인원수 "
     sql: ${TABLE}.foot_traffic_cnt ;;
   }
 
   dimension: getoff_passenger_cnt {
     type: number
+    sql: ${TABLE}.getoff_passenger_cnt ;;
+  }
+  measure: getout_passenger_cnt {
+    label: "하차인원수"
+    type: sum
     sql: ${TABLE}.getoff_passenger_cnt ;;
   }
 
@@ -49,7 +60,11 @@ view: bm_f_card_subway_dd {
     sql: ${TABLE}.passenger_cnt ;;
   }
 
-
+  measure: getin_passenger_cnt {
+    label: "승차인원수"
+    type: sum
+    sql: ${TABLE}.getoff_passenger_cnt ;;
+  }
   dimension: station_nm {
     type: string
     sql: ${TABLE}.station_nm ;;

@@ -42,6 +42,7 @@ view: date {
 
   dimension: calculation {
     type: number
+    label: "역 전체 유동인구"
     sql: ${TABLE}.calculation/10000 ;;
   }
 

@@ -3,9 +3,9 @@ view: bm_f_passenger_subway_dd {
     ;;
 
   measure: clean_transported_cnt {
-    type: sum
+    type: number
     label: "순수송인원수"
-    sql: ${TABLE}.clean_transported_cnt ;;
+    sql: abs(sum(${TABLE}.clean_transported_cnt));;
   }
 
   dimension_group: dt {

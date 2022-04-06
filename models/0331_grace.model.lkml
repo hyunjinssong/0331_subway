@@ -27,7 +27,22 @@ explore: bm_f_card_subway_dd {
   }
 }
 
+explore: date_subway {
+  join: date {
+    type: inner
+    sql_on: ${date.date_subway_bm_f_card_subway_dd_dt_date} = ${date_subway.bm_f_card_subway_dd_dt_date} ;;
+    relationship: many_to_one
+  }
+  join: bm_d_holiday_dt {
+    type: left_outer
 
+    sql_on: ${bm_d_holiday_dt.dt_date} = ${date_subway.bm_f_card_subway_dd_dt_date};;
+    relationship: many_to_one
+    }
+}
+
+
+explore: date {}
 explore: january {}
 explore: period {}
 explore: bm_d_transfer_station {}

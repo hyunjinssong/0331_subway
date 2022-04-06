@@ -10,7 +10,7 @@ view: bm_f_card_subway_dd {
   measure: sunsusong_transported_cnt {
     type: sum
     label: "순수송인원수"
-    sql: ${TABLE}.clean_transported_cnt ;;
+    sql: abs(${TABLE}.clean_transported_cnt) ;;
   }
 
   dimension_group: dt {
